@@ -1,9 +1,13 @@
-FROM denoland/deno:latest
+FROM node:20
 
 WORKDIR /app
 
+COPY package*.json ./
+
+RUN npm install
+
 COPY . .
 
-EXPOSE 8089
+EXPOSE 8080
 
-CMD ["deno","run","--unstable-detect-cjs","--allow-write","--allow-read","--allow-net","--allow-env","noname-server.js"]
+CMD ["node","noname-server.js"]
